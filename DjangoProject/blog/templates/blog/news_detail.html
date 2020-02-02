@@ -1,0 +1,36 @@
+{% extends 'blog/main.html' %}
+{% block main_section %}
+    <div class="alert alert-light">
+        <a href="{% url 'blog-home' %}">Come back</a>
+        <h1>{{ object.title }}</h1>
+        <p>{{ object.text|safe }}</p>
+        <div class="row">
+            <div>
+                {% if object.author.profile.img %}
+                <img src="{{ object.author.profile.img.url }}" alt="{{ object.author }}" class="user_image">
+                {% else %}
+                <img src="/pictures/default.jpg" alt="{{ object.author }}" class="user_image">
+                {% endif %}
+            </div>
+            <div class="mt-2">
+                <span class="text-muted">{{ post.object|date:"d E Y \i\n H:i:s" }}</span>
+                <p><b>Author:</b> <a href="{% url 'user-news' object.author %}">{{ object.author }}</a></p>
+            </div>
+        </div>
+        {% if object.author == user %}
+            <hr>
+            <a href="{% url 'news-update' object.id %}" class="btn btn-info">Update post</a>
+            <a href="{% url 'news-delete' object.id %}" class="btn btn-danger">Delete post</a>
+        {% endif %}
+    </div>
+{% endblock main_section %}
+
+{% block aside_news__section %}
+    <h3><b>10 films and serials for programmers</b></h3>
+    <img src="https://itproger.com/img/news/1477674462.jpg" class="img-thumbnail mb-1">
+    <p>Wen became on a way of programming yo won too lock som thing films or a serials
+        on this thematic. This is a 10 films and serials for programmers</p>
+    <a href="https://itproger.com/news/1" target="_blank">
+        <button class="btn btn-warning">Look</button>
+    </a>
+{% endblock aside_news__section %}
